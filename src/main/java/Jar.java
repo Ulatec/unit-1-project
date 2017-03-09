@@ -13,7 +13,7 @@ public class Jar {
         this.jarItem = jarItem;
 
         try {
-            int normalizedMaxItemsAllowed = convertNumber(maxItemsAllowed);
+            int normalizedMaxItemsAllowed = Integer.parseInt(maxItemsAllowed);
             this.numberOfItems = random.nextInt(normalizedMaxItemsAllowed);
             this.maxItems = normalizedMaxItemsAllowed;
         }catch(IllegalArgumentException iae){
@@ -22,7 +22,7 @@ public class Jar {
         System.out.println("Jar created!");
     }
     public boolean applyGuess(String guess){
-        int normalizedGuess = convertNumber(guess);
+        int normalizedGuess = normalizeGuess(guess);
         System.out.println(maxItems);
         System.out.println(guesses);
 
@@ -38,7 +38,12 @@ public class Jar {
         numberOfGuesses++;
         return numberFound;
     }
-    private int convertNumber(String string){
+    private int normalizeGuess(String string){
+        for(char c : string.toCharArray()){
+            if(!Character.isDigit(c)){
+                throw new IllegalArgumentException("All characters must be digits!");
+            }
+        }
         int newint = Integer.parseInt(string);
         return newint;
     }
