@@ -1,15 +1,16 @@
 import java.util.Random;
 
 public class Jar {
-    private final String jarItem;
+    private final String nameOfItem;
     private int numberOfItems;
     private boolean numberFound = false;
     private int numberOfGuesses;
     private final int maximumItems;
     private String hint;
-    public Jar(String jarItem, int maxItemsAllowed){
 
-        this.jarItem = jarItem;
+    public Jar(String nameOfItem, int maxItemsAllowed){
+
+        this.nameOfItem = nameOfItem;
         this.maximumItems = maxItemsAllowed;
         try{
             fillWithRandomNumberOfItems(maxItemsAllowed);
@@ -58,21 +59,26 @@ public class Jar {
     }
 
     public boolean gameIsWon(){
+
         return numberFound;
     }
-    public int getNumberOfAttempts(){
+    public int getNumberOfAttempts() {
         return numberOfGuesses;
     }
     public int getNumberOfItems(){
+
         return numberOfItems;
     }
     public int getMaximumItems(){
+
         return maximumItems;
     }
     public String getItemName(){
-        return jarItem;
+
+        return nameOfItem;
     }
     public String getHint(){
+
         return hint;
     }
 }
