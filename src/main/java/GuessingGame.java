@@ -22,7 +22,7 @@ public class GuessingGame {
                 System.out.printf("Please use a positive non-zero integer to fill the jar with %s.", jarItem);
             }
         }while(!validInt);
-        //gameSetupScanner.close();
+
         Jar jar = new Jar(jarItem, maximumItems);
         Prompter prompter = new Prompter(jar);
         prompter.displayStartingPrompt();
