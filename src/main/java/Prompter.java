@@ -25,6 +25,7 @@ public class Prompter {
         }
     }
     public void displayOutcome(){
+        /* I admit that I am unsure of the best way to handle string plurality */
         if(jar.getNumberOfAttempts() > 1){
             System.out.printf("Congratulations. %d was the correct number. You guessed the correct number in %d attempts" + ".", jar.getNumberOfItems(), jar.getNumberOfAttempts() );
         }else{
