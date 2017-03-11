@@ -5,8 +5,6 @@ public class Prompter {
     public Prompter(Jar jar){
         this.jar = jar;
     }
-
-
     public void promptForGuess(){
         Scanner scanner = new Scanner(System.in);
         String newGuess = scanner.nextLine();
@@ -17,8 +15,8 @@ public class Prompter {
         }
     }
     public void displayStartingPrompt() {
-        System.out.printf("PLAYER%n================%n");
-        System.out.printf("How many " +jar.getItemName() +" are in the jar. Your guess should be between 1 and " + jar.getMaximumItems() + ".%n");
+        System.out.printf("PLAYER%n================%n" +
+                "How many " +jar.getItemName() +" are in the jar. Your guess should be between 1 and " + jar.getMaximumItems() + ".%n");
     }
     public void displayHint(){
         /* display most recent hint if it exists. */
