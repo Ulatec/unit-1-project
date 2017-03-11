@@ -4,7 +4,6 @@ public class GuessingGame {
 
     public static void main(String[] args) {
         boolean validInt = false;
-        String nameOfItems;
         System.out.println("ADMINISTRATOR SETUP");
         System.out.println("================");
         Scanner gameSetupScanner = new Scanner(System.in);
@@ -23,7 +22,7 @@ public class GuessingGame {
                 System.out.printf("Please use a positive non-zero integer to fill the jar with %s.", jarItem);
             }
         }while(!validInt);
-        gameSetupScanner.close();
+        //gameSetupScanner.close();
         Jar jar = new Jar(jarItem, maximumItems);
         Prompter prompter = new Prompter(jar);
         prompter.displayStartingPrompt();

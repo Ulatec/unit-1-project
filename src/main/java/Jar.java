@@ -1,11 +1,11 @@
 import java.util.Random;
 
 public class Jar {
-    private String jarItem;
+    private final String jarItem;
     private int numberOfItems;
     private boolean numberFound = false;
     private int numberOfGuesses;
-    private int maximumItems;
+    private final int maximumItems;
     private String hint;
     public Jar(String jarItem, int maxItemsAllowed){
 
@@ -33,7 +33,7 @@ public class Jar {
         return validGuess;
     }
 
-    public boolean applyGuess(String guess){
+    public void applyGuess(String guess){
         if(!stringToIntegerValidation(guess)){
             throw new IllegalArgumentException("You must only use digits!");
         }
@@ -47,7 +47,6 @@ public class Jar {
         }
         setHint(validGuess);
         numberOfGuesses++;
-        return numberFound;
     }
 
     private void setHint(int validGuess){

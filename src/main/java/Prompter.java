@@ -1,6 +1,3 @@
-/**
- * Created by mark on 3/8/2017.
- */
 import java.util.Scanner;
 
 public class Prompter {
@@ -10,16 +7,14 @@ public class Prompter {
     }
 
 
-    public boolean promptForGuess(){
+    public void promptForGuess(){
         Scanner scanner = new Scanner(System.in);
         String newGuess = scanner.nextLine();
-        boolean guessResult = false;
         try {
-            guessResult = jar.applyGuess(newGuess);
+            jar.applyGuess(newGuess);
         }catch(IllegalArgumentException iae){
             System.out.printf(iae.getMessage() + "%n");
         }
-        return guessResult;
     }
     public void displayStartingPrompt() {
         System.out.printf("PLAYER%n================%n");
