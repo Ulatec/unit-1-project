@@ -17,24 +17,25 @@ public class Prompter {
         try {
             guessResult = jar.applyGuess(newGuess);
         }catch(IllegalArgumentException iae){
-            System.out.printf(iae.getMessage());
+            System.out.printf(iae.getMessage() + "%n");
         }
         return guessResult;
     }
-    public void displayPrompt() {
-            String progress = "How many " +jar.getItemType() +"%n" + " 1 and " + jar.getMaximumItems() + "%n";
-        System.out.printf(progress);
+    public void displayStartingPrompt() {
+        System.out.printf("PLAYER%n================%n");
+        System.out.printf("How many " +jar.getItemName() +" are in the jar. Your guess should be between 1 and " + jar.getMaximumItems() + ".%n");
     }
     public void displayHint(){
-        if(jar.getNumberOfAttempts() > 0) {
+        /* display most recent hint if it exists. */
+        if(jar.getNumberOfAttempts() > 0 && !jar.gameIsWon()) {
             System.out.println(jar.getHint());
         }
     }
     public void displayOutcome(){
         if(jar.getNumberOfAttempts() > 1){
-            System.out.printf("%d attempts %n", jar.getNumberOfAttempts());
+            System.out.printf("Congratulations. %d was the correct number. You guessed the correct number in %d attempts" + ".", jar.getNumberOfItems(), jar.getNumberOfAttempts() );
         }else{
-            System.out.printf("%d attempt %n", jar.getNumberOfAttempts());
+            System.out.printf("Congratulations. %d was the correct number. You guessed the correct number in %d attempt" + ".", jar.getNumberOfItems(), jar.getNumberOfAttempts());
         }
 
     }

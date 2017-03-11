@@ -5,66 +5,57 @@ public class Jar {
     private int numberOfItems;
     private boolean numberFound = false;
     private int numberOfGuesses;
-    private int maxItems;
-    String hint;
+    private int maximumItems;
+    private String hint;
     public Jar(String jarItem, int maxItemsAllowed){
-        Random random = new Random();
+
         this.jarItem = jarItem;
-        if(maxItemsAllowed > 0) {
-                this.numberOfItems = random.nextInt(maxItemsAllowed) + 1;
-                this.maxItems = maxItemsAllowed;
-        }else{
-            throw new IllegalArgumentException("Number of items must be larger than 0.");
+        this.maximumItems = maxItemsAllowed;
+        try{
+            fillWithRandomNumberOfItems(maxItemsAllowed);
+        }catch(IllegalArgumentException iae){
+            System.out.println("You must initialize the jar with a positive number of items.");
         }
-        //System.out.println("Jar created!");
+    }
+    private void fillWithRandomNumberOfItems(int maxItemsAllowed){
+            Random random = new Random();
+            this.numberOfItems = random.nextInt(maxItemsAllowed) + 1;
     }
 
-    private boolean integerToStringCheck(String string){
-        boolean validEntry = true;
+    private boolean stringToIntegerValidation(String string){
+        boolean validGuess = true;
         for(char c : string.toCharArray()){
             if(! Character.isDigit(c)){
-                validEntry = false;
-                throw new IllegalArgumentException("Must only use digits!");
+                validGuess = false;
             }
         }
 
-//        try {
-//        }catch(IllegalArgumentException iae){
-//            System.out.println("All characters must be digits)");
-//        }
-
-        return validEntry;
+        return validGuess;
     }
 
     public boolean applyGuess(String guess){
-        //
-//        System.out.println(maxItems);
-//        System.out.println(guesses);
-        if(!integerToStringCheck(guess)){
-            throw new IllegalArgumentException("Must only use digits!");
+        if(!stringToIntegerValidation(guess)){
+            throw new IllegalArgumentException("You must only use digits!");
         }
 
-        int normalizedGuess = Integer.parseInt(guess);
-        if(normalizedGuess > maxItems || normalizedGuess < 1){
-            throw new IllegalArgumentException("between 1 and" + maxItems);
+        int validGuess = Integer.parseInt(guess);
+        if(validGuess > maximumItems || validGuess < 1){
+            throw new IllegalArgumentException("Your guess must be between 1 and " + maximumItems + ".");
         }
-        try {
-            if (normalizedGuess == numberOfItems) {
-                numberFound = true;
-                numberOfGuesses++;
-            } else {
-                numberOfGuesses++;
-            }
-        }catch(IllegalArgumentException iae){
-
+        if (validGuess == numberOfItems) {
+            numberFound = true;
         }
-        if(normalizedGuess > numberOfItems && normalizedGuess != numberOfItems){
-            hint = "too high";
-        }else{
-            hint = "too low";
-        }
-
+        setHint(validGuess);
+        numberOfGuesses++;
         return numberFound;
+    }
+
+    private void setHint(int validGuess){
+        if(validGuess > numberOfItems && validGuess != numberOfItems){
+            hint = Integer.toString(validGuess) + " is too high.";
+        }else{
+            hint = Integer.toString(validGuess) + " is too low.";
+        }
     }
 
     public boolean gameIsWon(){
@@ -77,10 +68,12 @@ public class Jar {
         return numberOfItems;
     }
     public int getMaximumItems(){
-        return maxItems;
+        return maximumItems;
     }
-    public String getItemType(){
+    public String getItemName(){
         return jarItem;
     }
-    public String getHint(){return hint;}
+    public String getHint(){
+        return hint;
+    }
 }
